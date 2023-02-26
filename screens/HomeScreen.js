@@ -41,13 +41,14 @@ const HomeScreen = ({ navigation }) => {
   // Submits the changed Data
   const submitChanges = () => {
     transactionArray.push(amountData);
-    console.log(transactionArray);
+    
     setAmountData({
       type: "Income",
       amount: "",
       description: "",
       date: "",
     });
+    setVisibility(!visibility)
   };
 
   useEffect(() => {
@@ -75,7 +76,12 @@ const HomeScreen = ({ navigation }) => {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <TransactionBox description={item.description} amount={item.amount} />
+          <TransactionBox
+            description={item.description}
+            amount={item.amount}
+            color={item.type === "Income" ? "#00B152" : "#D10000"}
+            type={item.type}
+          />
         )}
         ListHeaderComponent={() => (
           <View
